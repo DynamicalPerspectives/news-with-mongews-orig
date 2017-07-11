@@ -5,7 +5,7 @@ var cheerio = require("cheerio");
 
 // models
 var Articles = require("../models/articles.js");
-var Comments = require("../models/comments.js");
+var Comments = require("../models/notes.js");
 
 var router = express.Router();
 

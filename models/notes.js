@@ -20,5 +20,3 @@ var Comments = mongoose.model("Comments", CommentsSchema);
 
 // exports Comments model
 module.exports = Comments;
-
-
