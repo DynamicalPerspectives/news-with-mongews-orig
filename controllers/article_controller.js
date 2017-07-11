@@ -5,7 +5,7 @@ var cheerio = require("cheerio");
 
 // models
 var Articles = require("../models/articles.js");
-var Comments = require("../models/notes.js");
+var Notes = require("../models/notes.js");
 
 var router = express.Router();
 
@@ -14,7 +14,7 @@ router.get("/articles/:id", function(req, res) {
   // queries the db to find the matching one in db
   Articles.findOne({ "_id": req.params.id })
   // populates all of the notes associated with it
-  .populate("comments")
+  .populate("Notes")
   // executes the query
   .exec(function(error, doc) {
     // logs any errors
@@ -31,18 +31,18 @@ router.get("/articles/:id", function(req, res) {
 // creates a new note or replaces an existing note
 router.post("/articles/:id", function(req, res) {
   // creates a new note and passes the req.body to the entry
-  var newComment = new Comments(req.body);
+  var newNote = new Notes(req.body);
   console.log(req.body);
   // saves the new note the db
-  newComment.save(function(error, doc) {
+  newNote.save(function(error, doc) {
     // logs errors
     if (error) {
       console.log(error);
     }
     else {
       // uses the article id to find and update note
-      Articles.findOneAndUpdate({ "_id": req.params.id }, { "comments": doc._id })
-      .populate("comments")
+      Articles.findOneAndUpdate({ "_id": req.params.id }, { "Notes": doc._id })
+      .populate("Notes")
       // executes the above query
       .exec(function(err, doc) {
         // logs any errors
