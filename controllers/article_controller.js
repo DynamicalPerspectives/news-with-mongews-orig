@@ -1,3 +1,6 @@
+
+// Note to self: Used your execise from class 06-21-2017/Exercise 05 and Exercise 11 (Scraping and Scraping into a DB). THIS WORKED.
+
 // dependencies
 var express = require("express");
 var request = require("request");
@@ -62,14 +65,15 @@ router.post("/articles/:id", function(req, res) {
 // scrapes and displays articles from Jezebel
 router.get("/", function(req, res) {
   // gets html body
-  request("http://www.jezebel.com/", function(error, response, html) {
+  request("https://www.jezebel.com/", function(error, response, html) {
     // loads html into cheerio and saves it to $
     var $ = cheerio.load(html);
     // holds entry objects
     var entry = [];
-    // Note to self: Used your execise from class 06-21-2017/Exercise 05 and Exercise 11 (Scraping and Scraping into a DB)
+    // Note to self: Used your execise from class 06-21-2017/Exercise 05 and Exercise 11 (Scraping and Scraping into a DB). THIS WORKED.
+    // $(".post-wrapper").each(function(i, element) {
     $(".post-wrapper.js_post-wrapper").each(function(i, element) {
-      // limits the results to be saved
+      // limits the results to be saved to 10
       if (i >= 10) {
         return false;
       }

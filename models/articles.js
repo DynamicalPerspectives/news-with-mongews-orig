@@ -19,10 +19,10 @@ var ArticlesSchema = new Schema ({
     type: Boolean,
     default: false
   },
-  comments: {
-    // save the comment ObjectID
+  notes: {
+    // save the comments ObjectID
     type: Schema.Types.ObjectId,
-    ref: "Comments"
+    ref: "Notes"
   }
 });
 

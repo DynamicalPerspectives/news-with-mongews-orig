@@ -51,7 +51,7 @@ app.set("view engine", "handlebars");
 // hooks mongoose with the mongodb database (our db: jezebel)
 
 var db = process.env.MONGODB_URI ||"mongodb://heroku_7xxdzd98:8gemlpcea4d2ircinahjsk7e6b@ds153412.mlab.com:53412/heroku_7xxdzd98"
-
+// var db = process.env.MONGODB_URI || "mongodb://localhost/jezebel";
 mongoose.connect(db);
 
 // saves our mongoose connection to db
@@ -62,7 +62,7 @@ db.on("error", function(error) {
   	console.log("Mongoose Error: ", error);
 });
 
-// logs a success message once logged in to the db through mongoose
+// logs a success message once logged in to db through mongoose
 db.once("open", function() {
   	console.log("Mongoose connection successful.");
 });
