@@ -5,7 +5,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var dotenv = require("dotenv");
-var e
+
 // database ORM
 var mongoose = require("mongoose");
 // scraping tools
@@ -50,43 +50,16 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 
 app.set("view engine", "handlebars");
 
-// connects mongoose with the mongodb database (our db: newsscraper)
-var mongoConfig = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
-mongoose.connect(mongoConfig);
 
-// saves our mongoose connection to db
-var db = mongoose.connection;
-
-// shows any mongoose errors
-db.on("error", function(error) {
-  console.log("Mongoose Error: ", error);
-});
-
-// logs a success message once logged in to the db through mongoose
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});
-
-
-// COULDN''T GET THIS TO WORK ON HEROKU (and yes, I removed the other conncection above)
-// mongoose.connect("mongodb://heroku_qbjjrjm9:p141ir5l1ffqhn9cpk2oaj0nrc@ds145312.mlab.com:45312/heroku_qbjjrjm9");
-//
-// var db = mongoose.connection;
-//
-// db.on('error', function (err) {
-//   console.log('Mongoose Error: ', err);
-// });
-//
-// db.once('open', function () {
-//   console.log('Mongoose connection successful.');
-// });
+// COULDN''T GET THIS TO WORK ON HEROKU
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var db = process.env.MONGODB_URI || "mongodb://heroku_7xxdzd98:8gemlpcea4d2ircinahjsk7e6b@ds153412.mlab.com:53412/heroku_7xxdzd98";
 
 
 // Incorporate these routes into our app
 // app.use('/', routes);
 // app.use('/save', routes);
 // app.use('/delete', routes);
-
 
  // routes
 app.use("/", routes);
